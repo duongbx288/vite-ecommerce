@@ -1,14 +1,18 @@
 import { createBrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import App from "../App";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import CartPage from "../pages/cart/CartPage";
 import ErrorPage from "../pages/ErrorPage";
-import MainPage from "../pages/mainpage/MainPage";
+import MainPage from "../pages/home/MainPage";
+import ProductDetail from "../pages/product/ProductDetail";
 
 const Homepage = () => {
   return (
     <div className="">
-      <div className="header">Header</div>
+      <Header />
       <Outlet />
-      <div className="footer">Footer</div>
+      <Footer />
     </div>
   );
 };
@@ -28,8 +32,12 @@ const mainRoutes = createBrowserRouter([
         element: <>Product</>,
       },
       {
-        path: "products/:productId",
-        element: <>Product Id</>,
+        path: "product/:productId",
+        element: <ProductDetail />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
       },
     ],
   },

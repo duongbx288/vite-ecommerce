@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface PostState {
-  list: [];
+  list: any[]; // Change later
 }
 
-const initialState = {
+const initialState: PostState = {
   list: [
     {
       id: "1",
