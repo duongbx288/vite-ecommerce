@@ -1,4 +1,5 @@
 # Project
+- Require NPM (Included in NodeJs).
 - Used vite
 - npm create vite@latest -y
 - typescript
