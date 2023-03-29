@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import CartPage from "../pages/cart/CartPage";
 import ErrorPage from "../pages/ErrorPage";
 import MainPage from "../pages/home/MainPage";
+import { PostDetail } from "../pages/post/PostDetail";
+import { PostEdit } from "../pages/post/PostEdit";
 import ProductDetail from "../pages/product/ProductDetail";
 
 const Homepage = () => {
@@ -38,6 +40,14 @@ const mainRoutes = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "post/:postId",
+        element: <PostDetail />,
+      },
+      {
+        path: "editPost/:postId",
+        element: <PostEdit />,
       },
     ],
   },

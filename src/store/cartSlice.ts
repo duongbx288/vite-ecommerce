@@ -46,20 +46,21 @@ const cartSlice = createSlice({
       console.log("incre");
       const product = action.payload;
       if (product.id) {
-        state.itemList.find((item) => item.id === product.id).quantity += 1;
+        const existItem = state.itemList.find((item) => item.id === product.id);
+        existItem.quantity += 1;
       }
     },
     decrementItem(state, action) {
       console.log("decre");
       const product = action.payload;
-      if (!product.id) return ;
+      if (!product.id) return;
       if (product.quantity > 0) {
-        state.itemList.find((item) => item.id === product.id).quantity -= 1;
-      } else (
+        const existItem = state.itemList.find((item) => item.id === product.id);
+        existItem.quantity == 1;
+      } else
         state.itemList = state.itemList.filter((item) => {
-            return item.id != product.id
-        })
-      )
+          return item.id != product.id;
+        });
     },
   },
 });

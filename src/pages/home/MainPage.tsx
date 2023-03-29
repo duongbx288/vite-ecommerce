@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { postAdded } from "../../store/postSlice";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const list = useAppSelector((state) => state.post.list);
@@ -20,19 +21,14 @@ const MainPage = () => {
       <article className="post-excerpt" key={item.id}>
         <h3>{item.title}</h3>
         <p className="post-content">{item.content.substring(0, 100)}</p>
+        <Link to={`/vite-ecommerce/post/${item.id}`}>View Post</Link>
       </article>
     );
   });
 
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(
-        postAdded({
-          id: nanoid(),
-          title,
-          content,
-        })
-      );
+      dispatch(postAdded(title, content));
 
       setTitle("");
       setContent("");
@@ -58,7 +54,9 @@ const MainPage = () => {
           value={content}
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked}>Save Post</button>
+        <button type="button" onClick={onSavePostClicked}>
+          Save Post
+        </button>
       </form>
       {renderList}
     </div>
