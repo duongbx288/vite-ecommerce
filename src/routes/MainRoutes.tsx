@@ -9,7 +9,7 @@ import ProductDetail from "../pages/product/ProductDetail";
 
 const Homepage = () => {
   return (
-    <div className="">
+    <div>
       <Header />
       <Outlet />
       <Footer />

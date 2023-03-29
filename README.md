@@ -1,11 +1,9 @@
 # Project
 - Require NPM (Included in NodeJs).
-- Used vite
-- npm create vite@latest -y
-- typescript
-- react
+- Used vite (To create react app via vite, use CLI: - npm create vite@latest)
+- Libraries used already included in package.json
 
-Config at: vite.config.ts
+Config file: vite.config.ts
 
 # Branch gh-pages
 - For static pages.

@@ -30,9 +30,12 @@ const CartPage = () => {
     return (
       <div key={item.id}>
         <div>
-          <h5>
-            <Link to={`/vite-ecommerce/product/` + item.id}>Name:{item.name}</Link>
-          </h5>
+          <Link
+            to={`/vite-ecommerce/product/` + item.id}
+            className="button muted-button"
+          >
+            Name:{item.name}
+          </Link>
           <p>Description: {item.description}</p>
           <p>Quantity: {item.quantity}</p>
           <p>Price: {item.price}</p>

@@ -1,8 +1,9 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useAppSelector } from "../../hooks/reduxHooks";
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   const product = useAppSelector((state) =>
     state.cart.itemList.find((item) => item.id === productId)
@@ -14,6 +15,7 @@ const ProductDetail = () => {
 
   return (
     <section>
+      <button onClick={()=> navigate('/vite-ecommerce/cart')}>Back</button>
       <article className="post">
         <h2>{product.name}</h2>
         <p className="post-content">{product.description}</p>
