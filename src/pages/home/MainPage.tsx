@@ -7,14 +7,18 @@ import { postAdded } from "../../store/postSlice";
 import { Link } from "react-router-dom";
 
 const MainPage = () => {
-  const list = useAppSelector((state) => state.post.list);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [userId, setUserId] = useState("");
+
+  const list = useAppSelector((state) => state.post.list);
+  const users = useAppSelector((state) => state.users);
 
   const dispatch = useAppDispatch();
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
+  const onAuthorChanged = (e) => setUserId(e.target.value);
 
   const renderList = list.map((item) => {
     return (
@@ -26,9 +30,17 @@ const MainPage = () => {
     );
   });
 
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
+
+  const usersOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ));
+
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(postAdded(title, content));
+      dispatch(postAdded(title, content, userId));
 
       setTitle("");
       setContent("");
@@ -47,6 +59,11 @@ const MainPage = () => {
           value={title}
           onChange={onTitleChanged}
         />
+        <label htmlFor="postAuthor">Author:</label>
+        <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+          <option value=""></option>
+          {usersOptions}
+        </select>
         <label htmlFor="postContent">Content:</label>
         <textarea
           id="postContent"
@@ -54,7 +71,7 @@ const MainPage = () => {
           value={content}
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked}>
+        <button type="button" onClick={onSavePostClicked} disabled={!canSave}>
           Save Post
         </button>
       </form>

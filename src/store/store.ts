@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postReducer from "./postSlice";
 import cartReducer from "./cartSlice";
+import usersReducer from "./usersSlice";
 // Create a store (with configureStore()) -> then slice (with createSlice({name: "....", initialState, reducers: {}}))
 // export slice (sliceName.reducer) -> import to store
 
@@ -8,6 +9,7 @@ const store = configureStore({
   reducer: {
     post: postReducer,
     cart: cartReducer,
+    users: usersReducer,
   },
 });
 

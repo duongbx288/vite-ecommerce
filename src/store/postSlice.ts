@@ -21,20 +21,23 @@ const initialState: PostState = {
 
 // Should not mutate state outside 'createSlide'
 // Check docs for more info
+// 'prepare callback' can take multiple arguments, run synchronous logic, etc.
 const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {
     postAdded: {
-      reducer(state, action: PayloadAction<{title: string, content: string}>) {
+      reducer(state, action: PayloadAction<{title: string, content: string, userId?: string}>) {
         state.list.push(action.payload);
       },
-      prepare(title: string, content: string) {
+      prepare(title: string, content: string, userId?: string) {
         return {
           payload: {
             id: nanoid(),
             title: title,
             content: content,
+            user: userId,
+            date: new Date().toISOString(),
           },
         };
       },
