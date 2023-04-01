@@ -2,13 +2,12 @@ import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { selectPostById } from "../../store/postSlice";
 
 export const PostDetail = () => {
   const { postId } = useParams();
 
-  const post = useAppSelector((state) =>
-    state.post.list.find((post) => post.id === postId)
-  );
+  const post = useAppSelector((state) => selectPostById(state, postId));
 
   if (!post) {
     return (

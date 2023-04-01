@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
-import { postUpdate } from "../../store/postSlice";
+import { postUpdate, selectPostById } from "../../store/postSlice";
 
 export const PostEdit = () => {
   const { postId } = useParams();
 
-  const post = useAppSelector((state) =>
-    state.post.list.find((post) => post.id === postId)
-  );
+  const post = useAppSelector((state) => selectPostById(state, postId));
 
   console.log(post);
 

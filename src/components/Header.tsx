@@ -26,9 +26,13 @@ const Header = () => {
           <li className="nav-item active" style={{marginRight: '5px'}}>
             <h4 style={{ cursor: 'pointer'}} onClick={() => navigate('/vite-ecommerce')}>Home</h4>
           </li>
-          <div></div>
+          <div>{` ---- `}</div>
           <li className="nav-item">
             <h4 style={{ cursor: 'pointer'}} onClick={() => navigate('/vite-ecommerce/cart')}>Cart</h4>
+          </li>
+          <div>{` ---- `}</div>
+          <li className="nav-item">
+            <h4 style={{ cursor: 'pointer'}} onClick={() => navigate('/vite-ecommerce/post')}>Post</h4>
           </li>
         </ul>
       </div>

@@ -8,6 +8,7 @@ import MainPage from "../pages/home/MainPage";
 import { PostDetail } from "../pages/post/PostDetail";
 import { PostEdit } from "../pages/post/PostEdit";
 import ProductDetail from "../pages/product/ProductDetail";
+import PostPage from "../pages/post/PostPage";
 
 const Homepage = () => {
   return (
@@ -40,6 +41,10 @@ const mainRoutes = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "post",
+        element: <PostPage />,
       },
       {
         path: "post/:postId",
