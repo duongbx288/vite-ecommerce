@@ -1,27 +1,21 @@
-import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  nanoid,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { sub } from "date-fns";
-
+import { client } from "../api/client";
 interface PostState {
   list: any[]; // Change later
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 }
 
 const initialState: PostState = {
-  list: [
-    {
-      id: "1",
-      title: "First",
-      content: "Hello. This is the first item of the list",
-      date: sub(new Date(), { minutes: 10 }).toISOString(),
-      reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
-    },
-    {
-      id: "2",
-      title: "Second",
-      content: "Hi. This is the second item of the list",
-      date: sub(new Date(), { minutes: 5 }).toISOString(),
-      reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
-    },
-  ],
+  list: [],
+  status: "idle",
+  error: null,
 };
 
 // Should not mutate state outside 'createSlide'
@@ -81,3 +75,12 @@ export default postSlice.reducer;
 export const selectAllPosts = (state) => state.post.list;
 export const selectPostById = (state, postId) =>
   state.post.list.find((post) => post.id === postId);
+
+// createAsyncThunk() takes 2 arguments:
+// + a string used as prefix for generated action types
+// + a 'payload creator' callback function that should
+//   return a Promise containing data, or error
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const response = await client.get("/fakeApi/posts");
+  return response.data;
+});
