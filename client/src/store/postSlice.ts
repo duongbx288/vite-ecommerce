@@ -9,7 +9,7 @@ import { client } from "../api/client";
 interface PostState {
   list: any[]; // Change later
   status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
+  error?: string | null ;
 }
 
 const initialState: PostState = {
@@ -63,6 +63,21 @@ const postSlice = createSlice({
         existingPost.reactions[reaction]++;
       }
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // Add any fetched posts to the array
+        state.list = state.list.concat(action.payload);
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
